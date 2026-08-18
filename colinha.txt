@@ -1,0 +1,3 @@
+pip freeze > requirements.txt --> baixa o requirements
+
+pip install -r requirements.txt  --> instala as dependências
