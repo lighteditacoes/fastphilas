@@ -2,8 +2,11 @@ pip freeze > requirements.txt --> baixa o requirements
 
 pip install -r requirements.txt  --> instala as dependências
 
-git add .
-git commit -m "nome"
+-- Em ordem para criar repositório 
+
+git add . --> 1º para lançar alteração
+git commit -m "nome" --> 2º para lançar alteração
 git branch -M main
 git remote add origin "https://github.com/lighteditacoes/fastphilas.git/"
-git push -u origin main
+git push -u origin main  --> só para criar 
+git push --> 3º para lançar alteração, não executar para criar repositório
