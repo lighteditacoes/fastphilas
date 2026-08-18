@@ -1,3 +1,9 @@
 pip freeze > requirements.txt --> baixa o requirements
 
 pip install -r requirements.txt  --> instala as dependências
+
+git add .
+git commit -m "nome"
+git branch -M main
+git remote add origin "https://github.com/lighteditacoes/fastphilas.git/"
+git push -u origin main
