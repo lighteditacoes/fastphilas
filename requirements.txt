@@ -1,3 +1,4 @@
+bcrypt==4.3.0
 blinker==1.9.0
 click==8.4.2
 colorama==0.4.6
@@ -7,6 +8,8 @@ greenlet==3.5.5
 itsdangerous==2.2.0
 Jinja2==3.1.6
 MarkupSafe==3.0.3
+passlib==1.7.4
 SQLAlchemy==2.0.52
 typing_extensions==4.16.0
+uuid==1.30
 Werkzeug==3.1.8
