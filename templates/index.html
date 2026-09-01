@@ -27,4 +27,12 @@
         <button type="submit">Cadastrar</button>
 </form>
 
+{% if erros %}
+
+    {% for erro in erros %}
+        <p>{{ erro }}</p>
+    {% endfor %}
+
+{% endif %}
+
 {% endblock %}

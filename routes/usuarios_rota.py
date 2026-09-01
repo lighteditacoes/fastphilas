@@ -22,14 +22,46 @@ def insert_usuario():
     try:
         if request.method == "POST":
             uuid_usuario = str(uuid.uuid4())
-            nome = request.form["nome"]
-            cpf = request.form["cpf"]
-            telefone = request.form["telefone"]
-            email = request.form["email"]
-            senha = hash_senha(request.form["senha"])
-            preferencial = request.form["preferencial"]
+            nome = request.form["nome"].strip()
+            cpf = request.form["cpf"].strip()
+            telefone = request.form["telefone"].strip()
+            email = request.form["email"].strip()
+            senha_crua = request.form["senha"].strip()
+            preferencial = request.form["preferencial"].strip()
             senha_fila = None
-            funcao = request.form["funcao"]
+            funcao = request.form["funcao"].strip()
+
+            msg = []
+
+            campos_obrigatorios = [nome, cpf, telefone, email, senha_crua, preferencial, funcao]
+            if any(not campo for campo in campos_obrigatorios):
+                msg.append("Todos os campos obrigatórios devem ser preenchidos.")
+
+            if nome and (len(nome) < 8 or len(nome) > 40):
+                msg.append("O Nome deve ter entre 8 e 40 caracteres.")
+
+            if cpf and len(cpf) != 11:
+                msg.append("O CPF deve ter exatamente 11 caracteres.")
+
+            if telefone and (len(telefone) < 10 or len(telefone) > 11):
+                msg.append("O Telefone deve ter 10 ou 11 caracteres.")
+
+            if email and (len(email) < 11 or len(email) > 100):
+                msg.append("O E-mail deve ter entre 11 e 100 caracteres.")
+
+            if senha_crua and (len(senha_crua) < 8):
+                msg.append("A senha deve ter no mínimo 8 caracteres.")
+
+            if preferencial and len(preferencial) > 3:
+                msg.append("O campo Preferencial deve ter no máximo 3 caracteres.")
+
+            if funcao and len(funcao) > 30:
+                msg.append("A Função deve ter no máximo 30 caracteres.")
+
+            if msg:
+                return render_template("index.html", erros=msg)
+            
+            senha = hash_senha(senha_crua)
 
             novo_usuario = Usuario(
                 uuid_usuario=uuid_usuario,
@@ -48,4 +80,7 @@ def insert_usuario():
             return redirect(url_for("usuario.home"))
 
     except Exception as e:
-        return f"Erro ao cadastrar usuário: {e}"
+        db.session.rollback()
+        return {"erros": [f"Erro interno no servidor: {str(e)}"]}, 500
+
+    return render_template("index.html")
