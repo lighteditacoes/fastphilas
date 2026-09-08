@@ -1,10 +1,11 @@
-from flask import Blueprint, render_template, url_for, redirect, request
+from flask import Blueprint, render_template, url_for, redirect, request, session
 from database import db
 from models.usuario import Usuario
 from models.fila import Filas
-
+from flask_login import login_user, logout_user, login_required, current_user
 import uuid
 from passlib.context import CryptContext
+from sqlalchemy import select
 
 usuario_bp = Blueprint("usuario", __name__)
 
@@ -45,7 +46,31 @@ def insert_usuario():
 
             db.session.add(novo_usuario)
             db.session.commit()
-            return redirect(url_for("usuario.home"))
+
+            return redirect(url_for("usuario.login"))
         return render_template("cadastro.html")
     except Exception as e:
         return f"Erro ao cadastrar usuário: {e}"
+
+@usuario_bp.route("/login", methods=["GET", "POST"])
+def login():
+    try:
+        if request.method == "POST":
+            cpf = request.form.get("cpf")
+            senha = request.form.get("senha")
+
+            usuario  = Usuario.query.filter_by(cpf=cpf).first()
+
+            if not usuario:
+                return render_template("login.html", erro="CPF incorreto.")
+            
+            if not pwd_context.verify(senha, usuario.senha):
+                return render_template("login.html", erro="Senha incorreta.")
+
+            login_user(usuario)
+            
+            return redirect(url_for("usuario.dashboard"))
+        return render_template("login.html")
+    except Exception as e:
+        return str(e)
+        
