@@ -1,7 +1,6 @@
-from flask import Flask, redirect, url_for
+from flask import Flask
 from routes.usuarios_rota import usuario_bp
 from database import db
-import uuid
 
 app = Flask(__name__)
 

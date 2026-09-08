@@ -78,7 +78,7 @@ def insert_usuario():
             db.session.add(novo_usuario)
             db.session.commit()
             return redirect(url_for("usuario.home"))
-
+        return render_template("cadastro.html")
     except Exception as e:
         db.session.rollback()
         return {"erros": [f"Erro interno no servidor: {str(e)}"]}, 500
