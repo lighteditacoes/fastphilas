@@ -1,4 +1,5 @@
-from flask import Blueprint, render_template, url_for, redirect, request
+from flask import Blueprint, render_template, url_for, redirect,request, session
+from flask_login import login_user, logout_user, login_required, current_user
 from database import db
 from models.usuario import Usuario
 from models.fila import Filas
@@ -49,3 +50,12 @@ def insert_usuario():
         return render_template("cadastro.html")
     except Exception as e:
         return f"Erro ao cadastrar usuário: {e}"
+
+@usuario_bp.route("/dashboard")
+@login_required
+def dashboard():
+
+    return render_template(
+        "dashboard.html",
+        usuario=current_user
+    )

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block titulo %}Dashboard{% endblock titulo %}
+
+{% block conteudo %}
+
+{% if current_user %}
+
+<p>Nome: {{ current_user.nome }}</p>
+<p>CPF: {{ current_user.cpf }}</p>
+<p>Telefone: {{ current_user.telefone }}</p>
+<p>Email: {{ current_user.email }}</p>
+<p>Preferencial: {{ current_user.preferencial }}</p>
+<p>Função: {{ current_user.funcao }}</p>
+
+{% endif %}
+
+{% endblock conteudo %}
