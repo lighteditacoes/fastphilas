@@ -4,14 +4,14 @@
 
 {% block conteudo %}
 
-{% if current_user %}
+{% if usuario %}
 
-<p>Nome: {{ current_user.nome }}</p>
-<p>CPF: {{ current_user.cpf }}</p>
-<p>Telefone: {{ current_user.telefone }}</p>
-<p>Email: {{ current_user.email }}</p>
-<p>Preferencial: {{ current_user.preferencial }}</p>
-<p>Função: {{ current_user.funcao }}</p>
+<p>Nome: {{ usuario.nome }}</p>
+<p>CPF: {{ usuario.cpf }}</p>
+<p>Telefone: {{ usuario.telefone }}</p>
+<p>Email: {{ usuario.email }}</p>
+<p>Preferencial: {{ usuario.preferencial }}</p>
+<p>Função: {{ usuario.funcao }}</p>
 
 {% endif %}
 
