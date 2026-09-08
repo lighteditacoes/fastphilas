@@ -1,6 +1,7 @@
 from database import db
 from flask_login import UserMixin
 
+
 class Usuario(UserMixin, db.Model):
     __tablename__ = "usuarios"
 
@@ -17,3 +18,6 @@ class Usuario(UserMixin, db.Model):
 
     def get_id(self):
         return str(self.id_usuario)
+
+    def __repr__(self):
+        return f"{self.nome} - {self.id_usuario}"

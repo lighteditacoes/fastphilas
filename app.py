@@ -1,7 +1,10 @@
 from flask import Flask
+from flask_login import LoginManager
 from routes.usuarios_rota import usuario_bp
 from database import db
 from flask_login import LoginManager
+from models.usuario import Usuario
+
 from models.usuario import Usuario
 
 app = Flask(__name__)

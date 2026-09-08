@@ -74,3 +74,12 @@ def login():
     except Exception as e:
         return str(e)
         
+
+@usuario_bp.route("/dashboard")
+@login_required
+def dashboard():
+
+    return render_template(
+        "dashboard.html",
+        usuario=current_user
+    )
