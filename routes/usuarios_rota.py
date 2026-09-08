@@ -46,6 +46,6 @@ def insert_usuario():
             db.session.add(novo_usuario)
             db.session.commit()
             return redirect(url_for("usuario.home"))
-
+        return render_template("cadastro.html")
     except Exception as e:
         return f"Erro ao cadastrar usuário: {e}"
