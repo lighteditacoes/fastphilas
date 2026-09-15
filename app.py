@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_login import LoginManager
 from routes.usuarios_rota import usuario_bp
+from routes.filas_rota import fila_bp
 from database import db
 from flask_login import LoginManager
 from models.usuario import Usuario
@@ -15,6 +16,7 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
 db.init_app(app)
 
 app.register_blueprint(usuario_bp)
+app.register_blueprint(fila_bp)
 
 login_manager = LoginManager()
 login_manager.init_app(app)

@@ -1,11 +1,9 @@
 from flask import Blueprint, render_template, url_for, redirect, request, session
 from database import db
 from models.usuario import Usuario
-from models.fila import Filas
 from flask_login import login_user, logout_user, login_required, current_user
 import uuid
 from passlib.context import CryptContext
-from sqlalchemy import select
 
 usuario_bp = Blueprint("usuario", __name__)
 
