@@ -16,8 +16,8 @@ def hash_senha(senha: str) -> str:
 def home():
     return render_template("index.html")
 
-@usuario_bp.route("/insert", methods=["GET", "POST"])
-def insert_usuario():
+@usuario_bp.route("/cadastro", methods=["GET", "POST"])
+def cadastro():
     try:
         if request.method == "POST":
             uuid_usuario = str(uuid.uuid4())
@@ -52,7 +52,7 @@ def insert_usuario():
             return redirect(url_for("usuario.login"))
         return render_template("cadastro.html")
     except Exception as e:
-        return f"Erro ao cadastrar usuário: {e}"
+        return str(e)
 
 @usuario_bp.route("/login", methods=["GET", "POST"])
 def login():
@@ -75,6 +75,12 @@ def login():
         return render_template("login.html")
     except Exception as e:
         return str(e)
+
+@usuario_bp.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('usuario.login'))
         
 
 @usuario_bp.route("/dashboard")

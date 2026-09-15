@@ -4,6 +4,8 @@
 
 {% block conteudo %}
 
+<a href="{{ url_for('usuario.logout') }}"><button>Sair da conta</button></a>
+
 {% if usuario %}
 
 <p>Nome: {{ usuario.nome }}</p>
