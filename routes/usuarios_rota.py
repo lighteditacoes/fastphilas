@@ -32,6 +32,10 @@ def insert_usuario():
             senha_fila = None
             funcao = request.form["funcao"]
 
+            usuario  = Usuario.query.filter_by(cpf=cpf).first()
+            if usuario:
+                raise Exception("CPF já cadastrado.")
+
             novo_usuario = Usuario(
                 uuid_usuario=uuid_usuario,
                 nome=nome,
