@@ -8,4 +8,4 @@ class Filas(db.Model):
     tipo_fila = db.Column(db.String(20), nullable=False)
     status = db.Column(db.String(20), nullable=False)
     hora_entrada = db.Column(db.String(20), nullable=False)
-    hora_chamada = db.Column(db.String(20), nullable=False)
+    hora_chamada = db.Column(db.String(20), nullable=True)
