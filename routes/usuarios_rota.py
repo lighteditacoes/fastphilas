@@ -25,14 +25,17 @@ def cadastro():
             cpf = request.form["cpf"]
             telefone = request.form["telefone"]
             email = request.form["email"]
-            senha = hash_senha(request.form["senha"])
+            senha = request.form["senha"]
             preferencial = request.form["preferencial"]
             senha_fila = None
             funcao = request.form["funcao"]
 
+            if not nome or not cpf or not telefone or not email or not senha or not preferencial or not funcao:
+                return render_template("cadastro.html", erro="Nenhum campo pode está vázio")
+            
             usuario  = Usuario.query.filter_by(cpf=cpf).first()
             if usuario:
-                raise Exception("CPF já cadastrado.")
+                return render_template("cadastro.html", erro="CPF já cadastrado.")
 
             novo_usuario = Usuario(
                 uuid_usuario=uuid_usuario,
@@ -40,7 +43,7 @@ def cadastro():
                 cpf=cpf,
                 telefone=telefone,
                 email=email,
-                senha=senha,
+                senha=hash_senha(senha),
                 preferencial=preferencial,
                 senha_fila=senha_fila,
                 funcao=funcao
@@ -60,6 +63,9 @@ def login():
         if request.method == "POST":
             cpf = request.form.get("cpf")
             senha = request.form.get("senha")
+
+            if not cpf or not senha:
+                return render_template("cadastro.html", erro="Nenhum campo pode está vázio")
 
             usuario  = Usuario.query.filter_by(cpf=cpf).first()
 
@@ -82,7 +88,6 @@ def logout():
     logout_user()
     return redirect(url_for('usuario.login'))
         
-
 @usuario_bp.route("/dashboard")
 @login_required
 def dashboard():
