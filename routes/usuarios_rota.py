@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, url_for, redirect, request, session
 from database import db
 from models.usuario import Usuario
+from models.fila import Filas
 from flask_login import login_user, logout_user, login_required, current_user
 import uuid
 from passlib.context import CryptContext
@@ -31,7 +32,7 @@ def cadastro():
             funcao = request.form["funcao"]
 
             if not nome or not cpf or not telefone or not email or not senha or not preferencial or not funcao:
-                return render_template("cadastro.html", erro="Nenhum campo pode está vázio")
+                return render_template("cadastro.html", erro="Nenhum campo pode estar vazio")
             
             usuario  = Usuario.query.filter_by(cpf=cpf).first()
             if usuario:
@@ -92,7 +93,17 @@ def logout():
 @login_required
 def dashboard():
 
+    if current_user.preferencial == "sim":
+        tipo_fila = "preferencial"
+    else:
+        tipo_fila = "normal"
+
+    fila = Filas.query.filter_by(tipo_fila=tipo_fila,
+                                  status="aguardando"
+                                  ).order_by(Filas.hora_entrada.asc()).all()
+
     return render_template(
         "dashboard.html",
-        usuario=current_user
+        usuario=current_user,
+        fila=fila
     )

@@ -17,4 +17,25 @@
 
 {% endif %}
 
+<form action="{{ url_for('fila.entrar_fila') }}" method="post">
+    <input type="hidden">
+    <button type="submit">Entrar na fila</button></a>
+</form>
+
+<h2>Fila de Usuários</h2>
+{% if fila %}
+<ul>
+    {% for senha in fila %}
+        {% if senha.uuid_usuario == usuario.uuid_usuario %}
+            <li style="color:green">{{ loop.index }}</li>
+        {% else %}
+            <li>{{ loop.index }}</li>
+        {% endif %}
+    {% endfor %}
+</ul>
+{% else %}
+<p>Não há filas disponíveis.</p>
+{% endif %}
+
+
 {% endblock conteudo %}

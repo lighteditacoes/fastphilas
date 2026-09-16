@@ -5,7 +5,7 @@ from models.usuario import Usuario
 from flask_login import login_required, current_user
 from datetime import datetime
 
-fila_bp = Blueprint("filas", __name__)
+fila_bp = Blueprint("fila", __name__)
 
 @fila_bp.route("/fila/entrar", methods=["GET", "POST"])
 @login_required
@@ -22,11 +22,12 @@ def entrar_fila():
             uuid_usuario=uuid,
             tipo_fila=tipo_fila,
             status="aguardando",
-            hora_entrada=datetime.now()
+            hora_entrada=datetime.now(),
             hora_chamada=None
             )
 
         db.session.add(senha_fila)
         db.session.commit()
 
-        pass #fazer depois
+        return redirect(url_for('usuario.dashboard'))
+    return redirect(url_for('usuario.dashboard'))
