@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block titulo %}Dashboard - ADM{% endblock titulo %}
+
+{% block conteudo %}
+
+<a href="{{ url_for('usuario.logout') }}"><button>Sair da conta</button></a>
+
+{% if usuario %}
+<p>Nome: {{ usuario.nome }}</p>
+<p>CPF: {{ usuario.cpf }}</p>
+<p>Telefone: {{ usuario.telefone }}</p>
+<p>Email: {{ usuario.email }}</p>
+<p>Preferencial: {{ usuario.preferencial }}</p>
+<p>Função: {{ usuario.funcao }}</p>
+{% endif %}
+
+<h2>Fila de usuários normais</h2>
+{% if fila_normal %}
+<ul>
+    {% for senha in fila_normal %}
+        <li>{{ loop.index }}  - {{ nomes_normal[loop.index0] }}</li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>Não há filas disponíveis.</p>
+{% endif %}
+
+<h2>Fila de usuários preferenciais</h2>
+{% if fila_preferencial %}
+<ul>
+    {% for senha in fila_preferencial %}
+        <li>{{ loop.index }} - {{ nomes_preferencial[loop.index0] }}</li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>Não há filas disponíveis.</p>
+{% endif %}
+
+{% endblock conteudo %}

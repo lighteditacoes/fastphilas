@@ -31,7 +31,7 @@
 <ul>
     {% for senha in fila %}
         {% if senha.uuid_usuario == usuario.uuid_usuario %}
-            <li style="color:green">{{ loop.index }}</li>
+            <li style="color:green">{{ loop.index }}(Você)</li>
         {% else %}
             <li>{{ loop.index }}</li>
         {% endif %}
