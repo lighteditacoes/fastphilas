@@ -12,6 +12,16 @@ fila_bp = Blueprint("fila", __name__)
 def entrar_fila():
     if request.method == "POST":
         uuid = current_user.uuid_usuario
+        
+        usuarios = Filas.query.filter_by(uuid_usuario=uuid).all()
+        print(usuarios)
+
+        if not usuarios:
+            pass
+        else:
+            for i in usuarios:
+                if i.status == "aguardando":
+                    return redirect(url_for('usuario.dashboard'))
 
         if current_user.preferencial == "sim":
             tipo_fila = "preferencial"
@@ -30,4 +40,4 @@ def entrar_fila():
         db.session.commit()
 
         return redirect(url_for('usuario.dashboard'))
-    return redirect(url_for('usuario.dashboard'))
+    return (url_for('usuario.dashboard'))
