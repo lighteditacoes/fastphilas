@@ -13,15 +13,10 @@ def entrar_fila():
     if request.method == "POST":
         uuid = current_user.uuid_usuario
         
-        usuarios = Filas.query.filter_by(uuid_usuario=uuid).all()
-        print(usuarios)
+        usuarios = Filas.query.filter_by(uuid_usuario=uuid, status="aguardando").all()
 
-        if not usuarios:
-            pass
-        else:
-            for i in usuarios:
-                if i.status == "aguardando":
-                    return redirect(url_for('usuario.dashboard'))
+        if usuarios:
+            return redirect(url_for('usuario.dashboard'))
 
         if current_user.preferencial == "sim":
             tipo_fila = "preferencial"
@@ -38,6 +33,21 @@ def entrar_fila():
 
         db.session.add(senha_fila)
         db.session.commit()
+
+        return redirect(url_for('usuario.dashboard'))
+    return (url_for('usuario.dashboard'))
+
+@fila_bp.route("/fila/sair", methods=["GET", "POST"])
+@login_required
+def sair_fila():
+    if request.method == "POST":
+        uuid = current_user.uuid_usuario
+
+        usuario = Filas.query.filter_by(uuid_usuario=uuid, status="aguardando").first()
+
+        if usuario:
+            usuario.status = "cancelado"
+            db.session.commit()
 
         return redirect(url_for('usuario.dashboard'))
     return (url_for('usuario.dashboard'))

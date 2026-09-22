@@ -21,6 +21,10 @@
     <input type="hidden">
     <button type="submit">Entrar na fila</button></a>
 </form>
+<form action="{{ url_for('fila.sair_fila') }}" method="post">
+    <input type="hidden">
+    <button type="submit">Sair da fila</button></a>
+</form>
 
 <h2>Fila de Usuários</h2>
 {% if fila %}
