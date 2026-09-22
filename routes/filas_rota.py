@@ -14,7 +14,6 @@ def entrar_fila():
         uuid = current_user.uuid_usuario
         
         usuarios = Filas.query.filter_by(uuid_usuario=uuid).all()
-        print(usuarios)
 
         if not usuarios:
             pass

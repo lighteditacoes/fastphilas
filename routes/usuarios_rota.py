@@ -98,12 +98,23 @@ def dashboard():
     else:
         tipo_fila = "normal"
 
-    fila = Filas.query.filter_by(tipo_fila=tipo_fila,
-                                  status="aguardando"
-                                  ).order_by(Filas.hora_entrada.asc()).all()
+    fila = Filas.query.filter_by(tipo_fila=tipo_fila, status="aguardando").order_by(Filas.hora_entrada.asc()).all()
 
-    return render_template(
-        "dashboard.html",
-        usuario=current_user,
-        fila=fila
-    )
+    if current_user.funcao == "administrador":
+        fila_normal = Filas.query.filter_by(tipo_fila="normal", status="aguardando").order_by(Filas.hora_entrada.asc()).all()
+        fila_preferencial = Filas.query.filter_by(tipo_fila="preferencial", status="aguardando").order_by(Filas.hora_entrada.asc()).all()
+
+        nomes_normal = []
+        nomes_preferencial = []
+
+        for i in fila_normal:
+            usuario = Usuario.query.filter_by(uuid_usuario=i.uuid_usuario).first()
+            nomes_normal.append(usuario.nome)
+
+        for i in fila_preferencial:
+            usuario = Usuario.query.filter_by(uuid_usuario=i.uuid_usuario).first()
+            nomes_preferencial.append(usuario.nome)
+
+        return render_template("dashboard-adm.html", usuario=current_user, fila_normal=fila_normal, fila_preferencial=fila_preferencial, nomes_normal=nomes_normal, nomes_preferencial=nomes_preferencial)
+    
+    return render_template("dashboard.html", usuario=current_user, fila=fila)
