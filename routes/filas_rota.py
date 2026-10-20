@@ -51,3 +51,17 @@ def sair_fila():
 
         return redirect(url_for('usuario.dashboard'))
     return (url_for('usuario.dashboard'))
+
+@fila_bp.route("/fila/despachar/<uuid>", methods=["GET", "POST"])
+@login_required
+def despachar_fila(uuid):
+    if request.method == "POST":
+
+        usuario = Filas.query.filter_by(uuid_usuario=uuid, status="aguardando").first()
+
+        if usuario:
+            usuario.status = "cancelado"
+            db.session.commit()
+
+        return redirect(url_for('usuario.dashboard'))
+    return (url_for('usuario.dashboard'))

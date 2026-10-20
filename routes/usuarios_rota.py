@@ -105,16 +105,20 @@ def dashboard():
         fila_preferencial = Filas.query.filter_by(tipo_fila="preferencial", status="aguardando").order_by(Filas.hora_entrada.asc()).all()
 
         nomes_normal = []
+        uuid_normal = []
         nomes_preferencial = []
+        uuid_preferencial = []
 
         for i in fila_normal:
             usuario = Usuario.query.filter_by(uuid_usuario=i.uuid_usuario).first()
             nomes_normal.append(usuario.nome)
+            uuid_normal.append(usuario.uuid_usuario)
 
         for i in fila_preferencial:
             usuario = Usuario.query.filter_by(uuid_usuario=i.uuid_usuario).first()
             nomes_preferencial.append(usuario.nome)
+            uuid_preferencial.append(usuario.uuid_usuario)
 
-        return render_template("dashboard-adm.html", usuario=current_user, fila_normal=fila_normal, fila_preferencial=fila_preferencial, nomes_normal=nomes_normal, nomes_preferencial=nomes_preferencial)
+        return render_template("dashboard-adm.html", usuario=current_user, fila_normal=fila_normal, fila_preferencial=fila_preferencial, nomes_normal=nomes_normal, nomes_preferencial=nomes_preferencial, uuid_normal=uuid_normal, uuid_preferencial=uuid_preferencial)
     
     return render_template("dashboard.html", usuario=current_user, fila=fila)

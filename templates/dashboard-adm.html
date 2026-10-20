@@ -20,6 +20,10 @@
 <ul>
     {% for senha in fila_normal %}
         <li>{{ loop.index }}  - {{ nomes_normal[loop.index0] }}</li>
+        <form action="{{ url_for('fila.despachar_fila', uuid=uuid_normal[loop.index0]) }}" method="post">
+            <input type="hidden">
+            <button type="submit">Despachar</button>
+        </form>
     {% endfor %}
 </ul>
 {% else %}
@@ -31,6 +35,10 @@
 <ul>
     {% for senha in fila_preferencial %}
         <li>{{ loop.index }} - {{ nomes_preferencial[loop.index0] }}</li>
+        <form action="{{ url_for('fila.despachar_fila', uuid=uuid_preferencial[loop.index0]) }}" method="post">
+            <input type="hidden">
+            <button type="submit">Despachar</button>
+        </form>
     {% endfor %}
 </ul>
 {% else %}
