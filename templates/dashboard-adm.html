@@ -17,6 +17,10 @@
 
 <h2>Fila de usuários normais</h2>
 {% if fila_normal %}
+    <form action="{{ url_for('fila.reiniciar_fila', tipo_fila='normal') }}" method="post">
+                <input type="hidden">
+                <button type="submit">Reiniciar Fila</button>
+    </form>
 <ul>
     {% for senha in fila_normal %}
         <li>{{ loop.index }}  - {{ nomes_normal[loop.index0] }}</li>
@@ -32,6 +36,10 @@
 
 <h2>Fila de usuários preferenciais</h2>
 {% if fila_preferencial %}
+    <form action="{{ url_for('fila.reiniciar_fila', tipo_fila='preferencial') }}" method="post">
+                <input type="hidden">
+                <button type="submit">Reiniciar Fila</button>
+    </form>
 <ul>
     {% for senha in fila_preferencial %}
         <li>{{ loop.index }} - {{ nomes_preferencial[loop.index0] }}</li>

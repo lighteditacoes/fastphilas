@@ -65,3 +65,18 @@ def despachar_fila(uuid):
 
         return redirect(url_for('usuario.dashboard'))
     return (url_for('usuario.dashboard'))
+
+@fila_bp.route("/fila/reiniciar/<tipo_fila>", methods=["GET", "POST"])
+@login_required
+def reiniciar_fila(tipo_fila):
+    if request.method == "POST":
+
+        usuarios = Filas.query.filter_by(status="aguardando", tipo_fila=tipo_fila).all()
+
+        if usuarios:
+            for usuario in usuarios:
+                usuario.status = "cancelado"
+                db.session.commit()
+
+        return redirect(url_for('usuario.dashboard'))
+    return (url_for('usuario.dashboard'))
