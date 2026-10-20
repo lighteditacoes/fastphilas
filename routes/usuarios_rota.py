@@ -88,6 +88,25 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('usuario.login'))
+
+@usuario_bp.route('/editar/<uuid>', methods=["GET", "POST"])
+@login_required
+def editar(uuid):
+    usuario  = Usuario.query.filter_by(uuid_usuario=uuid).first()
+    if request.method == "POST":
+        if not request.form["nome"] or not request.form["telefone"] or not request.form["email"] or not request.form["senha"] or not request.form["preferencial"]:
+            return render_template("cadastro.html", erro="Nenhum campo pode estar vazio")
+        
+        usuario.nome = request.form["nome"]
+        usuario.telefone = request.form["telefone"]
+        usuario.email = request.form["email"]
+        usuario.senha = hash_senha(request.form["senha"])
+        usuario.preferencial = request.form["preferencial"]
+
+        db.session.commit()
+        return redirect(url_for("usuario.login"))
+    return render_template("editar.html", usuario=usuario)
+
         
 @usuario_bp.route("/dashboard")
 @login_required
