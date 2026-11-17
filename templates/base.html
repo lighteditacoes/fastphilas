@@ -4,12 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FastPhilas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <h1>{% block titulo %}{% endblock %}</h1>
-    
-    {% block conteudo %}
+    <header class="topo">
+        <span class="marca">FastPhilas</span>
+    </header>
 
-    {% endblock %}
+    <main class="container {% block classe_container %}{% endblock %}">
+        <h1>{% block titulo %}{% endblock %}</h1>
+
+        {% block conteudo %}
+
+        {% endblock %}
+    </main>
 </body>
 </html>

@@ -4,44 +4,49 @@
 
 {% block conteudo %}
 
-<a href="{{ url_for('usuario.logout') }}"><button>Sair da conta</button></a>
+<div class="acoes espalhado">
+    <a href="{{ url_for('usuario.logout') }}"><button type="button" class="perigo">Sair da conta</button></a>
+</div>
 
 {% if usuario %}
-
-<p>Nome: {{ usuario.nome }}</p>
-<p>CPF: {{ usuario.cpf }}</p>
-<p>Telefone: {{ usuario.telefone }}</p>
-<p>Email: {{ usuario.email }}</p>
-<p>Preferencial: {{ usuario.preferencial }}</p>
-<p>Função: {{ usuario.funcao }}</p>
-
-<a href="{{ url_for('usuario.editar', uuid=usuario.uuid_usuario) }}"><button>Editar Dados</button></a>
-
+<div class="card">
+    <h2>Meus dados</h2>
+    <dl class="perfil">
+        <div><dt>Nome</dt><dd>{{ usuario.nome }}</dd></div>
+        <div><dt>CPF</dt><dd>{{ usuario.cpf }}</dd></div>
+        <div><dt>Telefone</dt><dd>{{ usuario.telefone }}</dd></div>
+        <div><dt>Email</dt><dd>{{ usuario.email }}</dd></div>
+        <div><dt>Preferencial</dt><dd>{{ usuario.preferencial }}</dd></div>
+        <div><dt>Função</dt><dd>{{ usuario.funcao }}</dd></div>
+    </dl>
+    <a href="{{ url_for('usuario.editar', uuid=usuario.uuid_usuario) }}"><button type="button" class="secundario">Editar Dados</button></a>
+</div>
 {% endif %}
 
-<form action="{{ url_for('fila.entrar_fila') }}" method="post">
-    <input type="hidden">
-    <button type="submit">Entrar na fila</button></a>
-</form>
-<form action="{{ url_for('fila.sair_fila') }}" method="post">
-    <input type="hidden">
-    <button type="submit">Sair da fila</button></a>
-</form>
+<div class="acoes">
+    <form action="{{ url_for('fila.entrar_fila') }}" method="post">
+        <button type="submit">Entrar na fila</button>
+    </form>
+    <form action="{{ url_for('fila.sair_fila') }}" method="post">
+        <button type="submit" class="perigo">Sair da fila</button>
+    </form>
+</div>
 
-<h2>Fila de Usuários</h2>
-{% if fila %}
-<ul>
-    {% for senha in fila %}
-        {% if senha.uuid_usuario == usuario.uuid_usuario %}
-            <li style="color:green">{{ loop.index }}(Você)</li>
-        {% else %}
-            <li>{{ loop.index }}</li>
-        {% endif %}
-    {% endfor %}
-</ul>
-{% else %}
-<p>Não há filas disponíveis.</p>
-{% endif %}
-
+<div class="card">
+    <h2>Fila de Usuários</h2>
+    {% if fila %}
+    <ul class="lista-fila">
+        {% for senha in fila %}
+            {% if senha.uuid_usuario == usuario.uuid_usuario %}
+                <li class="voce"><span class="posicao">{{ loop.index }}</span><span class="nome">(Você)</span></li>
+            {% else %}
+                <li><span class="posicao">{{ loop.index }}</span><span class="nome"></span></li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p class="vazio">Não há filas disponíveis.</p>
+    {% endif %}
+</div>
 
 {% endblock conteudo %}

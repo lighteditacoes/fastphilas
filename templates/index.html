@@ -4,7 +4,12 @@
 
 {% block conteudo %}
 
-<a href="{{ url_for('usuario.cadastro') }}"><button>Cadastro</button></a>
-<a href="{{ url_for('usuario.login') }}"><button>Log-in</button></a>
+<div class="card boas-vindas">
+    <p>Entre na fila de forma rápida e acompanhe sua posição em tempo real.</p>
+    <div class="acoes centro">
+        <a href="{{ url_for('usuario.cadastro') }}"><button type="button">Cadastro</button></a>
+        <a href="{{ url_for('usuario.login') }}"><button type="button" class="secundario">Log-in</button></a>
+    </div>
+</div>
 
 {% endblock conteudo %}

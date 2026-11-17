@@ -1,0 +1,359 @@
+/* ==========================================================
+   FastPhilas - Folha de estilos
+   Colocar em: static/css/style.css
+   ========================================================== */
+
+:root {
+    --cor-primaria: #4f46e5;
+    --cor-primaria-escura: #4338ca;
+    --cor-primaria-clara: #eef2ff;
+    --cor-perigo: #dc2626;
+    --cor-perigo-escura: #b91c1c;
+    --cor-sucesso: #16a34a;
+    --cor-sucesso-clara: #dcfce7;
+    --cor-fundo: #f3f4f6;
+    --cor-card: #ffffff;
+    --cor-texto: #1f2937;
+    --cor-texto-suave: #6b7280;
+    --cor-borda: #e5e7eb;
+    --raio: 12px;
+    --sombra: 0 4px 14px rgba(15, 23, 42, 0.08);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+    background: var(--cor-fundo);
+    color: var(--cor-texto);
+    line-height: 1.5;
+}
+
+/* ---------- Cabeçalho e estrutura ---------- */
+
+.topo {
+    background: var(--cor-primaria);
+    color: #fff;
+    padding: 16px 20px;
+    text-align: center;
+    box-shadow: var(--sombra);
+}
+
+.topo .marca {
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.container {
+    width: 100%;
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 24px 16px 48px;
+}
+
+.container.largo {
+    max-width: 860px;
+}
+
+h1 {
+    margin: 0 0 20px;
+    font-size: 1.6rem;
+    text-align: center;
+}
+
+h2 {
+    margin: 0 0 14px;
+    font-size: 1.2rem;
+}
+
+/* ---------- Cards ---------- */
+
+.card {
+    background: var(--cor-card);
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio);
+    box-shadow: var(--sombra);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+/* ---------- Botões ---------- */
+
+button,
+.botao {
+    display: inline-block;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 8px;
+    background: var(--cor-primaria);
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.15s, transform 0.05s;
+}
+
+button:hover,
+.botao:hover {
+    background: var(--cor-primaria-escura);
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+button.secundario {
+    background: var(--cor-primaria-clara);
+    color: var(--cor-primaria);
+}
+
+button.secundario:hover {
+    background: #e0e7ff;
+}
+
+button.perigo {
+    background: var(--cor-perigo);
+}
+
+button.perigo:hover {
+    background: var(--cor-perigo-escura);
+}
+
+button.pequeno {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+}
+
+button.cheio {
+    width: 100%;
+}
+
+.acoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.acoes a,
+.acoes form {
+    margin: 0;
+    text-decoration: none;
+}
+
+.acoes.centro {
+    justify-content: center;
+}
+
+.acoes.espalhado {
+    justify-content: space-between;
+}
+
+/* ---------- Formulários ---------- */
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 14px;
+}
+
+label {
+    margin-bottom: 4px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--cor-borda);
+    border-radius: 8px;
+    background: #fff;
+    color: var(--cor-texto);
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: var(--cor-primaria);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+}
+
+/* ---------- Mensagens ---------- */
+
+.erro {
+    margin-top: 16px;
+    padding: 10px 14px;
+    border-left: 4px solid var(--cor-perigo);
+    border-radius: 6px;
+    background: #fee2e2;
+    color: var(--cor-perigo-escura);
+    font-size: 0.95rem;
+}
+
+.vazio {
+    margin: 0;
+    color: var(--cor-texto-suave);
+    text-align: center;
+}
+
+.rodape-form {
+    margin-top: 20px;
+    text-align: center;
+    color: var(--cor-texto-suave);
+}
+
+.rodape-form p {
+    margin: 0 0 8px;
+}
+
+.rodape-form a {
+    color: var(--cor-primaria);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.rodape-form a:hover {
+    text-decoration: underline;
+}
+
+/* ---------- Tela inicial ---------- */
+
+.boas-vindas {
+    text-align: center;
+    padding: 32px 20px;
+}
+
+.boas-vindas p {
+    margin: 0 0 24px;
+    color: var(--cor-texto-suave);
+}
+
+/* ---------- Perfil ---------- */
+
+.perfil {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin: 0 0 16px;
+}
+
+.perfil div {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--cor-borda);
+}
+
+.perfil dt {
+    font-weight: 600;
+    color: var(--cor-texto-suave);
+}
+
+.perfil dd {
+    margin: 0;
+    text-align: right;
+    word-break: break-word;
+}
+
+/* ---------- Filas ---------- */
+
+.lista-fila {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.lista-fila li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 14px;
+    margin-bottom: 8px;
+    border: 1px solid var(--cor-borda);
+    border-radius: 8px;
+    background: #fff;
+}
+
+.lista-fila li:last-child {
+    margin-bottom: 0;
+}
+
+.lista-fila .posicao {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--cor-primaria-clara);
+    color: var(--cor-primaria);
+    font-weight: 700;
+}
+
+.lista-fila .nome {
+    flex: 1;
+    margin-left: 12px;
+}
+
+.lista-fila li.voce {
+    border-color: var(--cor-sucesso);
+    background: var(--cor-sucesso-clara);
+    color: var(--cor-sucesso);
+    font-weight: 700;
+}
+
+.lista-fila li.voce .posicao {
+    background: var(--cor-sucesso);
+    color: #fff;
+}
+
+.cabecalho-fila {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.cabecalho-fila h2 {
+    margin: 0;
+}
+
+.lista-fila form {
+    margin: 0;
+}
+
+/* ---------- Telas maiores ---------- */
+
+@media (min-width: 700px) {
+    .container {
+        padding-top: 40px;
+    }
+
+    .grid-filas {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        align-items: start;
+    }
+
+    .grid-filas .card {
+        margin-bottom: 0;
+    }
+}
